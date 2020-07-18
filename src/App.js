@@ -17,6 +17,14 @@ function App() {
             <p>{0}</p>
           </div>
         </div>
+        <div className="gameIntro">
+          <p className="gameInstruction">
+            Join the numbers and get to the <strong>2048</strong> tile!
+          </p>
+          <button className="newGameButton" type="button">
+            <strong>NEW GAME</strong>
+          </button>
+        </div>
       </div>
       <Board />
     </div>
