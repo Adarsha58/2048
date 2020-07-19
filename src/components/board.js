@@ -25,6 +25,7 @@ class Board extends Component {
   }
 
   handleKeyDown = (event) => {
+    event.preventDefault();
     switch (event.key) {
       case "ArrowLeft":
         return this.handleLeft();
