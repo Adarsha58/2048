@@ -5,7 +5,7 @@ class Tile extends Component {
   render() {
     return (
       <div className="tile" value={this.props.value}>
-        <strong className={this.props.value}>{this.props.value}</strong>
+        <div className="tileNumber">{this.props.value}</div>
       </div>
     );
   }

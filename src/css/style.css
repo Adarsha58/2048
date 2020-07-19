@@ -91,4 +91,12 @@ body {
   border-radius: 3px;
   float: left;
   margin: 8px;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.tileNumber {
+  text-align: center;
+  font-weight: bold;
+  font-size: 65px;
+  line-height: 115px;
 }
