@@ -16,11 +16,27 @@ class Board extends Component {
       ],
     };
     this.initializeTiles(this.state.tiles);
+
+    //binding normal void functions
     this.handleLeft = this.handleLeft.bind(this);
+    this.handleRight = this.handleRight.bind(this);
+    this.handleUp = this.handleUp.bind(this);
+    this.handleDown = this.handleDown.bind(this);
   }
 
   handleKeyDown = (event) => {
-    return this.handleLeft();
+    switch (event.key) {
+      case "ArrowLeft":
+        return this.handleLeft();
+      case "ArrowRight":
+        return this.handleRight();
+      case "ArrowUp":
+        return this.handleUp();
+      case "ArrowDown":
+        return this.handleDown();
+      default:
+        return null;
+    }
   };
 
   componentDidMount() {
@@ -33,9 +49,21 @@ class Board extends Component {
 
   gameEnds = (tiles) => false;
 
+  addARandomTile(tiles) {
+    let row, col;
+    do {
+      row = Math.floor(Math.random() * 4);
+      col = Math.floor(Math.random() * 4);
+    } while (tiles[row][col] !== "");
+    let twoOrFour = Math.floor(Math.random() * 2 + 1) * 2;
+    tiles[row][col] = twoOrFour.toString();
+  }
+
   handleLeft() {
+    console.log("left");
     let tiles = cloneDeep(this.state.tiles);
 
+    let didChange = 0;
     for (var i = 0; i < 4; i++) {
       for (var j = 1; j < 4; j++) {
         let itr = j;
@@ -45,9 +73,14 @@ class Board extends Component {
           if (tiles[i][itr - 1] === "") {
             tiles[i][itr - 1] = tiles[i][itr];
             tiles[i][itr] = "";
+            didChange++;
           } else if (tiles[i][itr] === tiles[i][itr - 1]) {
             tiles[i][itr] = "";
-            tiles[i][itr - 1] = eval(tiles[i][itr - 1] + tiles[i][itr - 1]);
+            tiles[i][itr - 1] = eval(
+              tiles[i][itr - 1] + "+" + tiles[i][itr - 1]
+            ).toString();
+            didChange++;
+            break;
           } else {
             break;
           }
@@ -55,20 +88,106 @@ class Board extends Component {
         }
       }
     }
-    this.setState({ tiles: tiles });
+    if (didChange > 0) this.addARandomTile(tiles);
+    this.setState({ tiles });
   }
 
-  handleRight = (tiles) => {
-    console.log("Right");
-  };
-  handleUp = (tiles) => {
-    console.log("Up");
-    return false;
-  };
-  handleDown = (tiles) => {
-    console.log("Down");
-    return false;
-  };
+  handleRight() {
+    let tiles = cloneDeep(this.state.tiles);
+    let didChange = 0;
+
+    for (var i = 0; i < 4; i++) {
+      for (var j = 2; j >= 0; j--) {
+        let itr = j;
+        while (itr < 3) {
+          if (tiles[i][itr] === "") break;
+
+          if (tiles[i][itr + 1] === "") {
+            tiles[i][itr + 1] = tiles[i][itr];
+            tiles[i][itr] = "";
+            didChange++;
+          } else if (tiles[i][itr] === tiles[i][itr + 1]) {
+            tiles[i][itr] = "";
+            tiles[i][itr + 1] = eval(
+              tiles[i][itr + 1] + "+" + tiles[i][itr + 1]
+            ).toString();
+            didChange++;
+            break;
+          } else {
+            break;
+          }
+          itr++;
+        }
+      }
+    }
+    if (didChange > 0) this.addARandomTile(tiles);
+    this.setState({ tiles });
+  }
+
+  handleUp() {
+    let tiles = cloneDeep(this.state.tiles);
+    let didChange = 0;
+
+    for (var j = 0; j < 4; j++) {
+      for (var i = 1; i < 4; i++) {
+        let itr = i;
+        while (itr > 0) {
+          if (tiles[itr][j] === "") break;
+
+          if (tiles[itr - 1][j] === "") {
+            tiles[itr - 1][j] = tiles[itr][j];
+            tiles[itr][j] = "";
+            didChange++;
+          } else if (tiles[itr][j] === tiles[itr - 1][j]) {
+            tiles[itr][j] = "";
+            tiles[itr - 1][j] = eval(
+              tiles[itr - 1][j] + "+" + tiles[itr - 1][j]
+            ).toString();
+            didChange++;
+            break;
+          } else {
+            break;
+          }
+          itr--;
+        }
+      }
+    }
+    if (didChange > 0) this.addARandomTile(tiles);
+    this.setState({ tiles });
+  }
+
+  handleDown() {
+    let tiles = cloneDeep(this.state.tiles);
+    let didChange = 0;
+
+    for (var j = 0; j < 4; j++) {
+      for (var i = 2; i >= 0; i--) {
+        let itr = i;
+        while (itr < 3) {
+          if (tiles[itr][j] === "") break;
+
+          if (tiles[itr + 1][j] === "") {
+            tiles[itr + 1][j] = tiles[itr][j];
+            tiles[itr][j] = "";
+            didChange++;
+          } else if (tiles[itr][j] === tiles[itr + 1][j]) {
+            tiles[itr][j] = "";
+            tiles[itr + 1][j] = eval(
+              tiles[itr + 1][j] + "+" + tiles[itr + 1][j]
+            ).toString();
+            didChange++;
+            break;
+          } else {
+            break;
+          }
+          itr++;
+        }
+      }
+    }
+
+    if (didChange > 0) this.addARandomTile(tiles);
+    this.setState({ tiles });
+  }
 
   initializeTiles = (tiles) => {
     //initializing the board with two random tiles
