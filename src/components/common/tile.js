@@ -4,9 +4,9 @@ import "../../css/style.css";
 class Tile extends Component {
   render() {
     const mystyle = {
-      backgroundColor: `rgb(${238 - ((this.props.value * 20) % 255)},${
-        225 - ((this.props.value * 10) % 100)
-      },${215 - ((this.props.value * 5) % 60)})`,
+      backgroundColor: `rgb(${(255*(1-Math.pow(Math.log2(this.props.value+1)/12,2)))%255},${
+        (255*(1-Math.sin((Math.log2(this.props.value+1)/12)*Math.PI*0.5))%255)
+      },${(255*(1-Math.pow(Math.log2(this.props.value+1)/12,0.5)))%255})`,
     };
     return (
       <div className="tile" value={this.props.value} style={mystyle}>
