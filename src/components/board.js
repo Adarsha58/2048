@@ -65,9 +65,10 @@ class Board extends Component {
 
     let didChange = 0;
     for (var i = 0; i < 4; i++) {
+      let isfinalized = 1;
       for (var j = 1; j < 4; j++) {
         let itr = j;
-        while (itr > 0) {
+        while (itr >= isfinalized) {
           if (tiles[i][itr] === "") break;
 
           if (tiles[i][itr - 1] === "") {
@@ -80,8 +81,10 @@ class Board extends Component {
               tiles[i][itr - 1] + "+" + tiles[i][itr - 1]
             ).toString();
             didChange++;
+            isfinalized++;
             break;
           } else {
+            isfinalized++;
             break;
           }
           itr--;
@@ -97,9 +100,10 @@ class Board extends Component {
     let didChange = 0;
 
     for (var i = 0; i < 4; i++) {
+      let isfinalized = 2;
       for (var j = 2; j >= 0; j--) {
         let itr = j;
-        while (itr < 3) {
+        while (itr <= isfinalized) {
           if (tiles[i][itr] === "") break;
 
           if (tiles[i][itr + 1] === "") {
@@ -112,8 +116,10 @@ class Board extends Component {
               tiles[i][itr + 1] + "+" + tiles[i][itr + 1]
             ).toString();
             didChange++;
+            isfinalized--;
             break;
           } else {
+            isfinalized--;
             break;
           }
           itr++;
@@ -129,9 +135,11 @@ class Board extends Component {
     let didChange = 0;
 
     for (var j = 0; j < 4; j++) {
+      let isfinalized = 1;
       for (var i = 1; i < 4; i++) {
         let itr = i;
-        while (itr > 0) {
+
+        while (itr >= isfinalized) {
           if (tiles[itr][j] === "") break;
 
           if (tiles[itr - 1][j] === "") {
@@ -143,9 +151,11 @@ class Board extends Component {
             tiles[itr - 1][j] = eval(
               tiles[itr - 1][j] + "+" + tiles[itr - 1][j]
             ).toString();
+            isfinalized++;
             didChange++;
             break;
           } else {
+            isfinalized++;
             break;
           }
           itr--;
@@ -161,9 +171,10 @@ class Board extends Component {
     let didChange = 0;
 
     for (var j = 0; j < 4; j++) {
+      let isfinalized = 2;
       for (var i = 2; i >= 0; i--) {
         let itr = i;
-        while (itr < 3) {
+        while (itr <= isfinalized) {
           if (tiles[itr][j] === "") break;
 
           if (tiles[itr + 1][j] === "") {
@@ -175,9 +186,11 @@ class Board extends Component {
             tiles[itr + 1][j] = eval(
               tiles[itr + 1][j] + "+" + tiles[itr + 1][j]
             ).toString();
+            isfinalized--;
             didChange++;
             break;
           } else {
+            isfinalized--;
             break;
           }
           itr++;
@@ -211,7 +224,7 @@ class Board extends Component {
             return row.map((col, colIndex) => {
               return (
                 <Tile
-                  value={col}
+                  value={col !== "" ? parseInt(col, 10) : 0}
                   key={`${colIndex}+${rowIndex}`}
                   id={`${colIndex}+${rowIndex}`}
                 />

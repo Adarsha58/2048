@@ -87,7 +87,7 @@ body {
 .tile {
   height: 113px;
   width: 113px;
-  background: rgba(238, 228, 218, 0.35);
+  background: rgb(238, 230, 218, 0.35);
   border-radius: 3px;
   float: left;
   margin: 8px;

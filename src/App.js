@@ -25,8 +25,8 @@ function App() {
             <strong>NEW GAME</strong>
           </button>
         </div>
+        <Board />
       </div>
-      <Board />
     </div>
   );
 }
