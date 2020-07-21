@@ -5,6 +5,7 @@ import "../css/style.css";
 import Board from "./board";
 import ScoreContainer from "./ScoreContainer";
 import GameIntro from "./GameIntro";
+let bestScore = 0;
 
 class App extends Component {
   constructor(props) {
@@ -20,18 +21,21 @@ class App extends Component {
 
     this.onNewGame = () => {
       if (!this.state.newGame) {
-        this.setState({ newGame: true });
+        this.setState({ newGame: true, score: 0 });
       } else {
-        this.setState({ newGame: false });
+        this.setState({ newGame: false, score: 0 });
       }
     };
   }
 
   render() {
+    if (this.state.score > bestScore) {
+      bestScore = this.state.score;
+    }
     return (
       <div className="container">
         <div className="title">2048</div>
-        <ScoreContainer score={this.state.score} />
+        <ScoreContainer score={this.state.score} bestScore={bestScore} />
         <GameIntro newGameHandler={this.onNewGame} />
         <Board
           scoreChangeHandler={this.onScoreChange}
