@@ -11,7 +11,7 @@ class ScoreContainer extends Component {
         </div>
         <div className="best">
           <p>BEST</p>
-          <p>{0}</p>
+          <p>{this.props.bestScore}</p>
         </div>
         {this.props.children}
       </div>
