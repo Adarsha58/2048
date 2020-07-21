@@ -5,9 +5,14 @@ class Tile extends Component {
   render() {
     const mystyle = {
       backgroundColor: `rgb(${
-        238 - ((Math.pow(this.props.value, 2) * 20) % 255)
-      },${225 - ((Math.pow(this.props.value, 2) * 10) % 100)},${
-        215 - ((Math.pow(this.props.value, 2) * 5) % 60)
+        (255 * (1 - Math.pow(Math.log2(this.props.value + 1) / 12, 2))) % 256
+      },${
+        (255 *
+          (1 -
+            Math.sin((Math.log2(this.props.value + 1) / 12) * Math.PI * 0.5))) %
+        256
+      },${
+        (255 * (1 - Math.pow(Math.log2(this.props.value + 1) / 12, 0.5))) % 256
       })`,
     };
     return (
