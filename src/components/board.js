@@ -44,11 +44,28 @@ class Board extends Component {
     document.addEventListener("keydown", this.handleKeyDown, false);
   }
 
+  componentDidUpdate() {
+    if (this.props.newGameButtonPressed === true) {
+      console.log("OH HIT");
+      this.resetBoard();
+      this.props.newGameHandler();
+    }
+  }
+
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyDown, false);
   }
 
-  gameEnds = (tiles) => false;
+  resetBoard = () => {
+    let tiles = [
+      ["", "", "", ""],
+      ["", "", "", ""],
+      ["", "", "", ""],
+      ["", "", "", ""],
+    ];
+    this.initializeTiles(tiles);
+    this.setState({ tiles });
+  };
 
   addARandomTile(tiles) {
     let row, col;
@@ -61,7 +78,7 @@ class Board extends Component {
   }
 
   handleLeft() {
-    console.log("left");
+    let scoreIncrease = 0;
     let tiles = cloneDeep(this.state.tiles);
 
     let didChange = 0;
@@ -81,6 +98,7 @@ class Board extends Component {
             tiles[i][itr - 1] = eval(
               tiles[i][itr - 1] + "+" + tiles[i][itr - 1]
             ).toString();
+            scoreIncrease += parseInt(tiles[i][itr - 1]);
             didChange++;
             isfinalized++;
             break;
@@ -94,11 +112,13 @@ class Board extends Component {
     }
     if (didChange > 0) this.addARandomTile(tiles);
     this.setState({ tiles });
+    if (scoreIncrease > 0) this.props.scoreChangeHandler(scoreIncrease);
   }
 
   handleRight() {
     let tiles = cloneDeep(this.state.tiles);
     let didChange = 0;
+    let scoreIncrease = 0;
 
     for (var i = 0; i < 4; i++) {
       let isfinalized = 2;
@@ -116,6 +136,7 @@ class Board extends Component {
             tiles[i][itr + 1] = eval(
               tiles[i][itr + 1] + "+" + tiles[i][itr + 1]
             ).toString();
+            scoreIncrease += parseInt(tiles[i][itr + 1]);
             didChange++;
             isfinalized--;
             break;
@@ -129,11 +150,13 @@ class Board extends Component {
     }
     if (didChange > 0) this.addARandomTile(tiles);
     this.setState({ tiles });
+    if (scoreIncrease > 0) this.props.scoreChangeHandler(scoreIncrease);
   }
 
   handleUp() {
     let tiles = cloneDeep(this.state.tiles);
     let didChange = 0;
+    let scoreIncrease = 0;
 
     for (var j = 0; j < 4; j++) {
       let isfinalized = 1;
@@ -153,6 +176,7 @@ class Board extends Component {
               tiles[itr - 1][j] + "+" + tiles[itr - 1][j]
             ).toString();
             isfinalized++;
+            scoreIncrease += parseInt(tiles[itr - 1][j]);
             didChange++;
             break;
           } else {
@@ -165,11 +189,13 @@ class Board extends Component {
     }
     if (didChange > 0) this.addARandomTile(tiles);
     this.setState({ tiles });
+    if (scoreIncrease > 0) this.props.scoreChangeHandler(scoreIncrease);
   }
 
   handleDown() {
     let tiles = cloneDeep(this.state.tiles);
     let didChange = 0;
+    let scoreIncrease = 0;
 
     for (var j = 0; j < 4; j++) {
       let isfinalized = 2;
@@ -188,6 +214,7 @@ class Board extends Component {
               tiles[itr + 1][j] + "+" + tiles[itr + 1][j]
             ).toString();
             isfinalized--;
+            scoreIncrease += parseInt(tiles[itr + 1][j]);
             didChange++;
             break;
           } else {
@@ -201,6 +228,7 @@ class Board extends Component {
 
     if (didChange > 0) this.addARandomTile(tiles);
     this.setState({ tiles });
+    if (scoreIncrease > 0) this.props.scoreChangeHandler(scoreIncrease);
   }
 
   initializeTiles = (tiles) => {

@@ -7,6 +7,7 @@ class Tile extends Component {
       backgroundColor: `rgb(${(255*(1-Math.pow(Math.log2(this.props.value+1)/12,2)))%256},${
         (255*(1-Math.sin((Math.log2(this.props.value+1)/12)*Math.PI*0.5))%256)
       },${(255*(1-Math.pow(Math.log2(this.props.value+1)/12,0.5)))%256})`,
+
     };
     return (
       <div className="tile" value={this.props.value} style={mystyle}>
