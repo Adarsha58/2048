@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../css/style.css";
 import Tile from "./common/tile";
 import cloneDeep from "lodash/cloneDeep";
+import GameEndPage from "./gameEndPage";
 
 class Board extends Component {
   constructor(props) {
@@ -23,6 +24,44 @@ class Board extends Component {
     this.handleUp = this.handleUp.bind(this);
     this.handleDown = this.handleDown.bind(this);
   }
+
+  gameEnds = () => {
+    for (let i = 0; i < 4; i++) {
+      for (let j = 0; j < 4; j++) {
+        if (this.state.tiles[i][j] == "") return false;
+
+        if (i == 3 && j == 3) {
+          return true;
+        }
+
+        if (i == 3) {
+          if (
+            this.state.tiles[i][j + 1] == "" ||
+            this.state.tiles[i][j + 1] == this.state.tiles[i][j]
+          ) {
+            return false;
+          }
+        } else if (j == 3) {
+          if (
+            this.state.tiles[i + 1][j] == "" ||
+            this.state.tiles[i + 1][j] == this.state.tiles[i][j]
+          ) {
+            return false;
+          }
+        } else {
+          if (
+            this.state.tiles[i][j + 1] == "" ||
+            this.state.tiles[i][j + 1] == this.state.tiles[i][j] ||
+            this.state.tiles[i + 1][j] == "" ||
+            this.state.tiles[i + 1][j] == this.state.tiles[i][j]
+          ) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  };
 
   handleKeyDown = (event) => {
     event.preventDefault();
@@ -248,19 +287,23 @@ class Board extends Component {
   render() {
     return (
       <div className="boardContainer">
-        <div className="tileContainer">
-          {this.state.tiles.map((row, rowIndex) => {
-            return row.map((col, colIndex) => {
-              return (
-                <Tile
-                  value={col !== "" ? parseInt(col, 10) : 0}
-                  key={`${colIndex}+${rowIndex}`}
-                  id={`${colIndex}+${rowIndex}`}
-                />
-              );
-            });
-          })}
-        </div>
+        {this.gameEnds() ? (
+          <GameEndPage />
+        ) : (
+          <div className="tileContainer">
+            {this.state.tiles.map((row, rowIndex) => {
+              return row.map((col, colIndex) => {
+                return (
+                  <Tile
+                    value={col !== "" ? parseInt(col, 10) : 0}
+                    key={`${colIndex}+${rowIndex}`}
+                    id={`${colIndex}+${rowIndex}`}
+                  />
+                );
+              });
+            })}
+          </div>
+        )}
       </div>
     );
   }
