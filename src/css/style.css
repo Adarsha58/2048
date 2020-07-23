@@ -1,6 +1,7 @@
 body {
   background: #0f8faf;
   color: #ffffff;
+  touch-action: none;
 }
 
 .title {

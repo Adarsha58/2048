@@ -106,10 +106,10 @@ class Board extends Component {
     if (xdiff < 0 && (ydiff == 0 || Math.abs(xdiff) > Math.abs(ydiff))) {
       return this.handleLeft();
     }
-    if ((xdiff == 0 || Math.abs(xdiff) < Math.abs(ydiff)) && ydiff > 0) {
+    if (ydiff < 0 && (xdiff == 0 || Math.abs(xdiff) < Math.abs(ydiff))) {
       return this.handleUp();
     }
-    if ((xdiff == 0 || Math.abs(xdiff) < Math.abs(ydiff)) && ydiff < 0) {
+    if (ydiff > 0 && (xdiff == 0 || Math.abs(xdiff) < Math.abs(ydiff))) {
       return this.handleDown();
     }
   };
