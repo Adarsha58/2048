@@ -3,7 +3,10 @@ import "../css/style.css";
 import Tile from "./common/tile";
 import cloneDeep from "lodash/cloneDeep";
 import GameEndPage from "./gameEndPage";
+import e from "express";
 
+let xCord = null;
+let yCord = null;
 class Board extends Component {
   constructor(props) {
     super(props);
@@ -79,8 +82,38 @@ class Board extends Component {
     }
   };
 
+  handleTouchStart = (e) => {
+    const firstTouch = e.touches[0];
+    xCord = firstTouch.clientX;
+    yCord = firstTouch.clientY;
+  };
+
+  handleTouchMove = (e) => {
+    if (!xCord || !yCord) return null;
+    const firstTouch = e.touches[0];
+    let xdiff = xCord - firstTouch.clientX;
+    let ydiff = xCord - firstTouch.clientY;
+
+    if (xdiff > 0 && (ydiff == 0 || Math.abs(xdiff) > Math.abs(ydiff))) {
+      return this.handleRight;
+    }
+
+    if (xdiff < 0 && (ydiff == 0 || Math.abs(xdiff) > Math.abs(ydiff))) {
+      return this.handleLeft;
+    }
+    if ((xdiff == 0 || Math.abs(xdiff) < Math.abs(ydiff)) && ydiff > 0) {
+      return this.handleUp;
+    }
+
+    if ((xdiff == 0 || Math.abs(xdiff) < Math.abs(ydiff)) && ydiff < 0) {
+      return this.handleDown;
+    }
+  };
+
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown, false);
+    document.addEventListener("ontouchstart", this.handleTouchStart, false);
+    document.addEventListener("ontouchmove", this.handleTouchMove, false);
   }
 
   componentDidUpdate() {
@@ -93,6 +126,8 @@ class Board extends Component {
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyDown, false);
+    document.removeEventListener("ontouchmove", this.handleTouchMove, false);
+    document.removeEventListener("ontouchmove", this.handleTouchMove, false);
   }
 
   resetBoard = () => {
