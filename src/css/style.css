@@ -7,16 +7,17 @@ body {
 
 .title {
   font-style: normal;
-  font-size: 80px;
+  font-size: 66px;
   font-weight: bold;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   float: left;
   margin: 0;
+  margin-top: 5px;
 }
 
 .container {
-  width: 30%;
-  height: 45%;
+  width: 27%;
+  height: 50%;
   margin: 0 auto;
   position: relative;
   display: block;
@@ -24,81 +25,96 @@ body {
 
 .scores {
   float: right;
+  height: 53px;
+
 }
 
 .score,
 .best {
-  height: 55px;
+  height: 100%;
   position: relative;
   border-radius: 3px;
-  background: #776e65;
+  background:#FFFDD0;
   display: inline-block;
-  text-align: center;
-  margin-top: 8px;
+  text-align: center;  
+  color: rgb(0, 11, 61);
   margin: 5px;
   font-size: 13px;
+  line-height: 8px;
+  font-family: cursive;
+  font-weight: bold;
 }
 
 .score {
-  width: 95.55px;
+  width: 105px;
 }
 
 .best {
-  width: 112.5px;
+  width: 105px;
+  margin-right: 15px;
+}
+.scoreValue{
+  
+  font-size: large;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+ 
 }
 
 .gameIntro {
   float: left;
   width: 100%;
+  margin-top: 13px;
 }
 
 .gameInstruction {
   font-family: Verdana, Geneva, sans-serif;
-  font-size: 17px;
+  font-size: 16px;
   width: 70%;
   float: left;
-  margin-right: 30px;
+  
+  margin-right: 24px;
   margin-bottom: 10px;
 }
 
 .newGameButton {
-  background-color: #776e65;
+  background-color: #ff8000;
   height: 40px;
   text-align: center;
-  width: 128px;
-  border-radius: 3px;
-  border-color: red;
-  margin: 8px 5px 5px 2px;
-  color: whitesmoke;
+  width: 22%;
+  color:white;
+  font-weight: bold;
+  font-size: 15px;
+  border-radius: 10px;
+  margin-right: 15px;
+  margin-top: 5px;
 }
 
 .boardContainer {
   float: left;
-  background: #bbada0;
-  width: 100%;
-  height: 542px;
+  background: rgb(21,26,81);
+  width: 501px;
+  height: 501x;
   margin-top: 20px;
   border-radius: 6px;
 }
 
 .tileContainer {
   float: left;
-  margin: 15.5px 14px;
+  margin: 6.5px;
 }
 
 .tile {
-  height: 113px;
-  width: 113px;
+  height: 109px;
+  width: 109px;
   background: rgb(238, 230, 218, 0.35);
   border-radius: 3px;
   float: left;
-  margin: 8px;
+  margin: 6.5px;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
 }
 
 .tileNumber {
   text-align: center;
   font-weight: bold;
-  font-size: 65px;
-  line-height: 115px;
+  line-height: 110px;
 }
