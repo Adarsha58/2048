@@ -2,6 +2,7 @@ body {
   background: #0f8faf;
   color: #ffffff;
   touch-action: none;
+
 }
 
 .title {
@@ -14,8 +15,8 @@ body {
 }
 
 .container {
-  width: 550px;
-  height: 1259.33px;
+  width: 30%;
+  height: 45%;
   margin: 0 auto;
   position: relative;
   display: block;
