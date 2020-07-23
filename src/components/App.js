@@ -37,7 +37,7 @@ class App extends Component {
         <div className="title">2048</div>
         <ScoreContainer score={this.state.score} bestScore={bestScore} />
         <GameIntro newGameHandler={this.onNewGame} />
-        <Board
+        <Board id= "game-board"
           scoreChangeHandler={this.onScoreChange}
           newGameButtonPressed={this.state.newGame}
           newGameHandler={this.onNewGame}

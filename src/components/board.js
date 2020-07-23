@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import "../css/style.css";
 import Tile from "./common/tile";
 import cloneDeep from "lodash/cloneDeep";
-import GameEndPage from "./gameEndPage";
+import GameEndPage from "./common/gameEndPage";
 
 let xCord = null;
 let yCord = null;
+
 class Board extends Component {
   constructor(props) {
     super(props);
@@ -85,7 +86,6 @@ class Board extends Component {
     const firstTouch = e.touches[0];
     xCord = firstTouch.clientX;
     yCord = firstTouch.clientY;
-    console.log(xCord, yCord);
   };
 
   handleTouchMove = (e) => {
@@ -116,13 +116,12 @@ class Board extends Component {
 
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown, false);
-    document.addEventListener("touchstart", this.handleTouchStart, false);
-    document.addEventListener("touchmove", this.handleTouchMove, false);
+    document.getElementById("game-board").addEventListener("touchstart", this.handleTouchStart, false);
+    document.getElementById("game-board").addEventListener("touchmove", this.handleTouchMove, false);
   }
 
   componentDidUpdate() {
     if (this.props.newGameButtonPressed === true) {
-      console.log("OH HIT");
       this.resetBoard();
       this.props.newGameHandler();
     }
@@ -130,8 +129,8 @@ class Board extends Component {
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyDown, false);
-    document.removeEventListener("touchstart", this.handleTouchStart, false);
-    document.removeEventListener("touchmove", this.handleTouchMove, false);
+    document.getElementById("game-board").removeEventListener("touchstart", this.handleTouchStart, false);
+    document.getElementById("game-board").removeEventListener("touchmove", this.handleTouchMove, false);
   }
 
   resetBoard = () => {
