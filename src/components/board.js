@@ -126,7 +126,7 @@ class Board extends Component {
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyDown, false);
-    document.removeEventListener("ontouchmove", this.handleTouchMove, false);
+    document.removeEventListener("ontouchstart", this.handleTouchStart, false);
     document.removeEventListener("ontouchmove", this.handleTouchMove, false);
   }
 
