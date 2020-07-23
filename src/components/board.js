@@ -3,7 +3,6 @@ import "../css/style.css";
 import Tile from "./common/tile";
 import cloneDeep from "lodash/cloneDeep";
 import GameEndPage from "./gameEndPage";
-import e from "express";
 
 let xCord = null;
 let yCord = null;
@@ -86,34 +85,39 @@ class Board extends Component {
     const firstTouch = e.touches[0];
     xCord = firstTouch.clientX;
     yCord = firstTouch.clientY;
+    console.log(xCord, yCord);
   };
 
   handleTouchMove = (e) => {
     if (!xCord || !yCord) return null;
     const firstTouch = e.touches[0];
-    let xdiff = xCord - firstTouch.clientX;
-    let ydiff = xCord - firstTouch.clientY;
+    let xdiff = firstTouch.clientX - xCord;
+    let ydiff = firstTouch.clientY - yCord;
+    console.log("AFter", xdiff, ydiff);
+
+    xCord = 0;
+    yCord = 0;
 
     if (xdiff > 0 && (ydiff == 0 || Math.abs(xdiff) > Math.abs(ydiff))) {
-      return this.handleRight;
+      console.log("right");
+      return this.handleRight();
     }
 
     if (xdiff < 0 && (ydiff == 0 || Math.abs(xdiff) > Math.abs(ydiff))) {
-      return this.handleLeft;
+      return this.handleLeft();
     }
     if ((xdiff == 0 || Math.abs(xdiff) < Math.abs(ydiff)) && ydiff > 0) {
-      return this.handleUp;
+      return this.handleUp();
     }
-
     if ((xdiff == 0 || Math.abs(xdiff) < Math.abs(ydiff)) && ydiff < 0) {
-      return this.handleDown;
+      return this.handleDown();
     }
   };
 
   componentDidMount() {
     document.addEventListener("keydown", this.handleKeyDown, false);
-    document.addEventListener("ontouchstart", this.handleTouchStart, false);
-    document.addEventListener("ontouchmove", this.handleTouchMove, false);
+    document.addEventListener("touchstart", this.handleTouchStart, false);
+    document.addEventListener("touchmove", this.handleTouchMove, false);
   }
 
   componentDidUpdate() {
@@ -126,8 +130,8 @@ class Board extends Component {
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this.handleKeyDown, false);
-    document.removeEventListener("ontouchstart", this.handleTouchStart, false);
-    document.removeEventListener("ontouchmove", this.handleTouchMove, false);
+    document.removeEventListener("touchstart", this.handleTouchStart, false);
+    document.removeEventListener("touchmove", this.handleTouchMove, false);
   }
 
   resetBoard = () => {
