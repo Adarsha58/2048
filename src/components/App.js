@@ -33,15 +33,17 @@ class App extends Component {
       bestScore = this.state.score;
     }
     return (
-      <div className="container">
+      <div className="container" >
         <div className="title">2048</div>
         <ScoreContainer score={this.state.score} bestScore={bestScore} />
         <GameIntro newGameHandler={this.onNewGame} />
-        <Board id= "game-board"
+        <div id= "game-board">
+        <Board 
           scoreChangeHandler={this.onScoreChange}
           newGameButtonPressed={this.state.newGame}
           newGameHandler={this.onNewGame}
         />
+        </div>
       </div>
     );
   }
