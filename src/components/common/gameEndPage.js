@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import '../../css/style.css';
 
 class gameEndPage extends Component {
   render() {
     return (
-      <div>
-        <h1>Game Ends</h1>
+      <div className="gameOver">
+        Game Over!
       </div>
     );
   }
