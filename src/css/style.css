@@ -25,7 +25,8 @@ body {
 
 .scores {
   float: right;
-  height: 53px;
+  height: 57px;
+  margin-top: 5px;
 
 }
 
