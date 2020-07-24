@@ -34,8 +34,9 @@ class App extends Component {
     }
     return (
       <div className="container" >
-        <div className="title">2048</div>
-        <ScoreContainer score={this.state.score} bestScore={bestScore} />
+          <div className="title">2048</div>
+          <ScoreContainer score={this.state.score} bestScore={bestScore} />
+  
         <GameIntro newGameHandler={this.onNewGame} />
         <div id= "game-board">
         <Board 

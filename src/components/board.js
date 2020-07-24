@@ -325,23 +325,27 @@ class Board extends Component {
   render() {
     return (
       <div className="boardContainer">
-        {this.gameEnds() ? (
-          <GameEndPage />
-        ) : (
-          <div className="tileContainer">
-            {this.state.tiles.map((row, rowIndex) => {
-              return row.map((col, colIndex) => {
-                return (
-                  <Tile
-                    value={col !== "" ? parseInt(col, 10) : 0}
-                    key={`${colIndex}+${rowIndex}`}
-                    id={`${colIndex}+${rowIndex}`}
-                  />
-                );
-              });
-            })}
-          </div>
-        )}
+        <div className="tileContainer">
+          {this.state.tiles.map((row, rowIndex) => {
+            return row.map((col, colIndex) => {
+              return (
+                <Tile
+                  value={col !== "" ? parseInt(col, 10) : 0}
+                  key={`${colIndex}+${rowIndex}`}
+                  id={`${colIndex}+${rowIndex}`}
+                />
+              );
+            });
+          })}
+        </div>
+        {
+          this.gameEnds() ?
+            <div className="gameEndPage">
+              <GameEndPage/>
+            </div>
+            : null
+        }
+
       </div>
     );
   }

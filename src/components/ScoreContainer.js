@@ -7,11 +7,11 @@ class ScoreContainer extends Component {
       <div className="scores">
         <div className="score">
           <p>SCORE</p>
-          <p>{this.props.score}</p>
+          <p className= "scoreValue">{this.props.score}</p>
         </div>
         <div className="best">
           <p>BEST</p>
-          <p>{this.props.bestScore}</p>
+          <p className= "scoreValue">{this.props.bestScore}</p>
         </div>
         {this.props.children}
       </div>
